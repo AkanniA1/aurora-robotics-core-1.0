@@ -1,5 +1,10 @@
+#Import the numpy library with the name as np
 import numpy as np
+
+#Import the pyplot file from the matplotlib library with the name plt
 import matplotlib.pyplot as plt
+
+#Import the slider class from the widgets file in the matplotlib library
 from matplotlib.widgets import Slider
 
 
@@ -32,7 +37,7 @@ ax.set_xlim(- (L1+L2+0.2), L1+L2+0.2)
 #Sets the x-axis
 ax.set_ylim(- (L1+L2+0.2), L1+L2+0.2)
 
-#Add the grid inside the plot
+#Add the grid inside the plot with the dashed linestyle and width of 0.5
 ax.grid(True, linestyle="--", linewidth=0.5)
 
 #Set te title of the plot
@@ -62,18 +67,18 @@ ee_text = ax.text(0.02, 0.98, "", transform=ax.transAxes,
 slider_ax1 = plt.axes([0.15, 0.05, 0.7, 0.02])
 slider_ax2 = plt.axes([0.15, 0.01, 0.7, 0.02])
 
-#With the customized value this get the slider going indicating the sliding range in degree
+#With the customized value this get the slider going, indicating the sliding range in degree
 s_theta1 = Slider(slider_ax1, 'θ1 (deg)', -180.0, 180.0, valinit=np.rad2deg(theta1_0))
 s_theta2 = Slider(slider_ax2, 'θ2 (deg)', -180.0, 180.0, valinit=np.rad2deg(theta2_0))
 
-#Update function is responsible for making chaning on the plot in realtime
+#Update function is responsible for making changes on the plot in realtime
 def update(_):
 
     #Goes to the customize slidder and get the value of the slider with the .val then assign to to vaiable
     th1 = np.deg2rad(s_theta1.val)
     th2 = np.deg2rad(s_theta2.val)
 
-    #With assigned variable call the Foward Kinematic function and assign them to the the variable b, j, e, since a return is expected
+    #With assigned variable call the Forward Kinematic function and assign them to the the variable b, j, e, since a return is expected
     b, j, e = fk(th1, th2)
 
     #With the Line2D call the method set_data for the plot
